@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="FileAppender" fileName="log/test.log" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="INFO"></logger>
+        <logger name="org.mybatis" level="INFO"></logger>
+        <!--程序输入日志级别, 高于等于INFO日志级别会被打印-->
+        <Root level="INFO">
+            <!--通过控制台输出日志-->
+            <AppenderRef ref="ConsoleAppender"/>
+            <!--通过文件输出日志-->
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

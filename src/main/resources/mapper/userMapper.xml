@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace要指向定义的mapper接口 -->
+<mapper namespace="com.example.mapper.UserMapper">
+    <!-- id即mapper接口中的具体方法名 -->
+    <!-- resultType即方法返回值-->
+    <select id="getUserById" resultType="com.example.model.User">
+        SELECT * FROM user_tb WHERE id = #{id}
+    </select>
+    <select id="getUsers" resultType="com.example.model.User">
+        SELECT * FROM user_tb
+    </select>
+<!--    <insert id="insertUser" parameterType="com.example.model.User">-->
+<!--        INSERT INTO user_tb(username, password, name) VALUES (#{username}, #{password}, #{name})-->
+<!--    </insert>-->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM user_tb WHERE id=#{id}
+    </delete>
+    <insert id="insertUser" parameterType="com.example.model.User"
+        useGeneratedKeys="true" keyProperty="id"
+    >
+        INSERT INTO user_tb(username, password, name) VALUES(#{username}, #{password}, #{name})
+    </insert>
+    <update id="updateUser" parameterType="com.example.model.User">
+        UPDATE user_tb SET username=#{username}, password=#{password}, name=#{name} where id=#{id}
+    </update>
+</mapper>
