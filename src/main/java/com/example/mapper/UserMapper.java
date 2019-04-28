@@ -11,4 +11,5 @@ public interface UserMapper {
     public void deleteUser(int id);
     public Integer insertUser(String username, String password, String name);
     public Integer updateUser(String username, String password, String name, int id);
+    public void deleteAllUser();
 }

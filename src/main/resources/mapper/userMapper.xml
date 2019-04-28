@@ -2,19 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace要指向定义的mapper接口 -->
 <mapper namespace="com.example.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.example.model.User">
+        <id property="id" column="u_id" />
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="u_name" />
+        <result property="teamId" column="team_id" />
+        <association property="team" javaType="com.example.model.Team">
+            <id property="id" column="t_id" />
+            <result property="name" column="t_name" />
+            <result property="location" column="location" />
+        </association>
+    </resultMap>
     <!-- id即mapper接口中的具体方法名 -->
     <!-- resultType即方法返回值-->
-    <select id="getUserById" resultType="com.example.model.User">
-        SELECT * FROM user_tb WHERE id = #{id}
+    <select id="getUserById" resultMap="userResultMap">
+        SELECT u.id AS u_id, u.name AS u_name, u.username, u.password, u.team_id,
+        t.id AS t_id, t.name AS t_name, t.location FROM user_tb AS u, team AS t
+        WHERE u.id = #{id}
     </select>
-    <select id="getUsers" resultType="com.example.model.User">
-        SELECT * FROM user_tb
+    <select id="getUsers" resultMap="userResultMap">
+        SELECT u.id AS u_id, u.name AS u_name, u.username, u.password, u.team_id,
+        t.id AS t_id, t.name AS t_name, t.location FROM user_tb AS u, team AS t
     </select>
 <!--    <insert id="insertUser" parameterType="com.example.model.User">-->
 <!--        INSERT INTO user_tb(username, password, name) VALUES (#{username}, #{password}, #{name})-->
 <!--    </insert>-->
     <delete id="deleteUser" parameterType="int">
         DELETE FROM user_tb WHERE id=#{id}
+    </delete>
+    <delete id="deleteAllUser">
+        DELETE FROM user_tb
     </delete>
     <insert id="insertUser" parameterType="com.example.model.User"
         useGeneratedKeys="true" keyProperty="id"

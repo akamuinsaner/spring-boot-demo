@@ -19,4 +19,7 @@ public class UserService {
     public int updateUser(String username, String password, String name, int id) {
         return userMapper.updateUser(username, password, name, id);
     }
+    public void deleteAllUser() {
+        userMapper.deleteAllUser();
+    }
 }

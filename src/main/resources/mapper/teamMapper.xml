@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.TeamMapper">
+    <resultMap id="teamResultMap" type="com.example.model.Team">
+        <id property="id" column="t_id" />
+        <result property="name" column="t_name" />
+        <result property="location" column="location" />
+        <collection property="players" ofType="com.example.model.User">
+            <id property="id" column="u_id" />
+            <result property="name" column="u_name" />
+            <result property="username" column="username" />
+            <result property="password" column="password" />
+        </collection>
+    </resultMap>
+
+    <select id="getTeams" resultMap="teamResultMap">
+        SELECT t.id AS t_id, t.name AS t_name, location,
+        u.id as u_id, u.name as u_name, u.username, u.password FROM
+        team AS t, user_tb AS u
+    </select>
+</mapper>

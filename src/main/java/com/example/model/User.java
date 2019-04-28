@@ -1,10 +1,13 @@
 package com.example.model;
+import java.util.List;
 
 public class User {
     private Integer id;
     private String username;
     private String password;
     private String name;
+    private Integer teamId;
+    private Team team;
 
     public User() {
         super();
@@ -18,7 +21,27 @@ public class User {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getTeamId() {
+        return this.teamId;
+    }
+
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
+    }
+
+    public Team getTeam() {
+        return this.team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public String getUsername() {

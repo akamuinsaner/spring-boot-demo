@@ -37,4 +37,9 @@ public class UserController {
         int updateId = userService.updateUser(user.getUsername(), user.getPassword(), user.getName(), id);
         return updateId;
     }
+
+    @RequestMapping(value="/users", method = RequestMethod.DELETE)
+    public void deleteAllUser() {
+        userService.deleteAllUser();
+    }
 }
