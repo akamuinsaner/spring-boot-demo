@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    image: daocloud.io/library/postgres:latest
+    container_name: demo-database
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=demodb
+    networks:
+      - demo-backend
+
+  demo-application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/rootapp
+    depends_on:
+      - postgres
+    container_name: demo-application
+    environment:
+      - pg_user=dbuser
+      - pg_host=postgres
+      - pg_pwd=123456
+      - pg_db=demodb
+      - pg_port=5432
+    ports:
+      - "8181:8888"
+    networks:
+      - demo-backend
+
+networks:
+  demo-backend:
+
+
